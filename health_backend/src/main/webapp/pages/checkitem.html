@@ -268,7 +268,7 @@
                     if (valid) {
                         //表单校验通过，发生ajax请求，将录入的数据提交到后台进行处理
                         console.log(this.formData);
-                        axios.post("/checkitem/add.do", this.formData).then((res) => {
+                        axios.post("/checkItem/add.do", this.formData).then((res) => {
                             //关闭新增窗口
                             this.dialogFormVisible = false;
                             if (res.data.flag) {//执行成功
