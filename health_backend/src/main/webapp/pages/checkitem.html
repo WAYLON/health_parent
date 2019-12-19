@@ -237,7 +237,7 @@
                 this.$refs['dataEditForm'].validate((valid) => {
                     if (valid) {
                         //表单校验通过，可以提交数据
-                        axios.post("/checkitem/edit.do", this.formData).then((res) => {
+                        axios.post("/checkItem/edit.do", this.formData).then((res) => {
                             if (res.data.flag) {
                                 //弹出成功提示信息
                                 this.$message({
@@ -299,7 +299,7 @@
                     pageSize: this.pagination.pageSize,
                     queryString: this.pagination.queryString
                 };
-                axios.post("/checkitem/findPage.do", param).then((res) => {
+                axios.post("/checkItem/findPage.do", param).then((res) => {
                     //解析Controller响应回的数据，为模型数据赋值
                     this.pagination.total = res.data.total;
                     this.dataList = res.data.rows;
@@ -320,7 +320,7 @@
                 //弹出编辑窗口
                 this.dialogFormVisible4Edit = true;
                 //回显数据，发送ajax请求根据ID查询当前检查项数据
-                axios.get("/checkitem/findById.do?id=" + row.id).then((res) => {
+                axios.get("/checkItem/findById.do?id=" + row.id).then((res) => {
                     if (res.data.flag) {
                         //进行回显，基于VUE的数据绑定实现
                         this.formData = res.data.data;
@@ -344,7 +344,7 @@
                     type: 'warning'
                 }).then(() => {
                     //用户点击确定按钮，发送ajax请求，将检查项ID提交到Controller进行处理
-                    axios.get("/checkitem/delete.do?id=" + row.id).then((res) => {
+                    axios.get("/checkItem/delete.do?id=" + row.id).then((res) => {
                         if (res.data.flag) {
                             //执行成功
                             //弹出成功提示信息
