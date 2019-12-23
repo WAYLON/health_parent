@@ -7,3 +7,7 @@
 *.iml
 out
 gen
+/health_service/target/
+/health_interface/target/
+/health_common/target/
+/health_backend/target/

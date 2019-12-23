@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 /**
  * 检查项管理
  *
@@ -26,8 +28,8 @@ public class CheckItemController {
     /**
      * 新增检查项
      *
-     * @param checkItem 检查项
-     * @return Result
+     * @param checkItem
+     * @return
      */
     @RequestMapping("/add")
     public Result add(@RequestBody CheckItem checkItem) {
@@ -54,8 +56,8 @@ public class CheckItemController {
     /**
      * 删除检查项
      *
-     * @param id 检查项id
-     * @return Result
+     * @param id
+     * @return
      */
     @RequestMapping("/delete")
     public Result delete(Integer id) {
@@ -99,6 +101,22 @@ public class CheckItemController {
         } catch (Exception e) {
             e.printStackTrace();
             //服务调用失败
+            return new Result(false, MessageConstant.QUERY_CHECKITEM_FAIL);
+        }
+    }
+
+    /**
+     * 查询全部检查项
+     *
+     * @return
+     */
+    @RequestMapping("/findAll")
+    public Result findAll() {
+        try {
+            List<CheckItem> checkItem = checkItemService.findAll();
+            return new Result(true, MessageConstant.QUERY_CHECKITEM_SUCCESS, checkItem);
+        } catch (Exception e) {
+            e.printStackTrace();
             return new Result(false, MessageConstant.QUERY_CHECKITEM_FAIL);
         }
     }

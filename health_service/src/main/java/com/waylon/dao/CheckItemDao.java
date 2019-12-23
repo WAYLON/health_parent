@@ -1,8 +1,9 @@
 package com.waylon.dao;
 
 import com.github.pagehelper.Page;
-import com.waylon.entity.PageResult;
 import com.waylon.pojo.CheckItem;
+
+import java.util.List;
 
 /**
  * 检查项dao接口
@@ -22,4 +23,6 @@ public interface CheckItemDao {
     public void edit(CheckItem checkItem);
 
     public CheckItem findById(Integer id);
+
+    public List<CheckItem> findAll();
 }

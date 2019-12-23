@@ -3,11 +3,11 @@ package com.waylon.service.impl;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.waylon.dao.CheckItemDao;
 import com.waylon.entity.PageResult;
 import com.waylon.entity.QueryPageBean;
 import com.waylon.pojo.CheckItem;
 import com.waylon.service.CheckItemService;
-import com.waylon.dao.CheckItemDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -62,5 +62,10 @@ public class CheckItemServiceImpl implements CheckItemService {
     @Override
     public CheckItem findById(Integer id) {
         return checkItemDao.findById(id);
+    }
+
+    @Override
+    public List<CheckItem> findAll() {
+        return checkItemDao.findAll();
     }
 }
