@@ -26,8 +26,8 @@ public class CheckItemController {
     /**
      * 新增检查项
      *
-     * @param checkItem 检查项
-     * @return Result
+     * @param checkItem
+     * @return
      */
     @RequestMapping("/add")
     public Result add(@RequestBody CheckItem checkItem) {
@@ -43,8 +43,8 @@ public class CheckItemController {
     /**
      * 检查项分页查询
      *
-     * @param queryPageBean 分页bean
-     * @return PageResult
+     * @param queryPageBean
+     * @return
      */
     @RequestMapping("/findPage")
     public PageResult findPage(@RequestBody QueryPageBean queryPageBean) {
@@ -54,8 +54,8 @@ public class CheckItemController {
     /**
      * 删除检查项
      *
-     * @param id 检查项id
-     * @return Result
+     * @param id
+     * @return
      */
     @RequestMapping("/delete")
     public Result delete(Integer id) {
@@ -71,8 +71,8 @@ public class CheckItemController {
     /**
      * 编辑检查项
      *
-     * @param checkItem 检查项
-     * @return Result
+     * @param checkItem
+     * @return
      */
     @RequestMapping("/edit")
     public Result edit(@RequestBody CheckItem checkItem) {
@@ -87,8 +87,8 @@ public class CheckItemController {
     /**
      * 查询单个检查项
      *
-     * @param id 检查项id
-     * @return Result
+     * @param id
+     * @return
      */
     @RequestMapping("/findById")
     public Result findById(Integer id) {

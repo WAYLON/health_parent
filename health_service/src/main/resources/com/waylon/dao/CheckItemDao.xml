@@ -4,8 +4,9 @@
 <mapper namespace="com.waylon.dao.CheckItemDao">
     <!--插入检查项数据-->
     <insert id="add" parameterType="com.waylon.pojo.CheckItem">
-        insert into t_checkitem(code, name, sex, age, price, type, remark, attention)
-        values (#{code}, #{name}, #{sex}, #{age}, #{price}, #{type}, #{remark}, #{attention})
+        insert into t_checkitem(code,name,sex,age,price,type,remark,attention)
+                      values
+        (#{code},#{name},#{sex},#{age},#{price},#{type},#{remark},#{attention})
     </insert>
 
     <select id="selectByCondition" parameterType="String" resultType="com.waylon.pojo.CheckItem">
@@ -17,14 +18,12 @@
 
     <!--删除-->
     <delete id="deleteById" parameterType="int">
-        delete
-        from t_checkitem
+        delete from t_checkitem
         where id = #{id}
     </delete>
     <!--根据检查项id查询中间关系表-->
     <select id="findCountByCheckItemId" resultType="long" parameterType="int">
-        select count(*)
-        from t_checkgroup_checkitem
+        select count(*) from t_checkgroup_checkitem
         where checkitem_id = #{checkitem_id}
     </select>
 
@@ -60,8 +59,6 @@
         where id = #{id}
     </update>
     <select id="findById" parameterType="int" resultType="com.waylon.pojo.CheckItem">
-        select *
-        from t_checkitem
-        where id = #{id}
+        select * from t_checkitem where id = #{id}
     </select>
 </mapper>
