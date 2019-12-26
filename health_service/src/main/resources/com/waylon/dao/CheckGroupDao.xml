@@ -73,4 +73,9 @@
         </set>
         where id = #{id}
     </update>
+    <!--删除-->
+    <delete id="deleteById" parameterType="int">
+        delete from t_checkgroup
+        where id = #{id}
+    </delete>
 </mapper>

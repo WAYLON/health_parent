@@ -60,12 +60,19 @@ public class CheckGroupServiceImpl implements CheckGroupService {
         checkGroupDao.edit(checkGroup);
     }
 
+    @Override
+    public void deleteById(Integer id) {
+        //根据检查组id删除中间表数据（清理原有关联关系）
+        checkGroupDao.deleteAssociation(id);
+        checkGroupDao.deleteById(id);
+    }
+
     private void setCheckGroupAndCheckItem(Integer checkGroupId, Integer[] checkItemIds) {
         if (checkItemIds != null && checkItemIds.length > 0) {
             for (Integer checkItemId : checkItemIds) {
                 Map<String, Integer> map = new HashMap<>();
-                map.put("checkgroup_id", checkGroupId);
-                map.put("checkitem_id", checkItemId);
+                map.put("checkGroupId", checkGroupId);
+                map.put("checkItemId", checkItemId);
                 checkGroupDao.setCheckGroupAndCheckItem(map);
             }
         }

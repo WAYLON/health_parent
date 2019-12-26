@@ -18,4 +18,6 @@ public interface CheckGroupService {
 
     public void edit(CheckGroup checkGroup, Integer[] checkItemIds);
 
+    public void deleteById(Integer id);
+
 }
