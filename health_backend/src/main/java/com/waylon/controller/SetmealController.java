@@ -18,9 +18,9 @@ import java.util.List;
 import java.util.UUID;
 
 /**
- * 检查项管理
+ * 套餐管理
  *
- * @author 80481
+ * @author wanglei
  */
 @RestController
 @RequestMapping("/setmeal")
@@ -106,7 +106,7 @@ public class SetmealController {
     }
 
     /**
-     * 根据id查询
+     * 根据id查询套餐
      *
      * @param id
      * @return
@@ -139,5 +139,21 @@ public class SetmealController {
         }
     }
 
+    /**
+     * 编辑套餐
+     *
+     * @param setmeal
+     * @param checkgroupIds
+     * @return
+     */
+    @RequestMapping("/edit")
+    public Result edit(@RequestBody Setmeal setmeal, Integer[] checkgroupIds) {
+        try {
+            setmealService.edit(setmeal, checkgroupIds);
+        } catch (Exception e) {
+            return new Result(false, MessageConstant.EDIT_SETMEAL_FAIL);
+        }
+        return new Result(true, MessageConstant.EDIT_SETMEAL_SUCCESS);
+    }
 
 }

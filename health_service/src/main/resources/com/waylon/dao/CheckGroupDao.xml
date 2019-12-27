@@ -85,4 +85,10 @@
         select *
         from t_checkgroup
     </select>
+
+    <!--根据检查项组d查询中间关系表-->
+    <select id="findCountByCheckGroupId" resultType="long" parameterType="int">
+        select count(*) from t_setmeal_checkgroup
+        where checkgroup_id = #{checkgroup_id}
+    </select>
 </mapper>

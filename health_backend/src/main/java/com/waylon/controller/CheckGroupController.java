@@ -13,6 +13,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+/**
+ * 检查组管理
+ *
+ * @author wanglei
+ */
 @RestController
 @RequestMapping("/checkGroup")
 public class CheckGroupController {
@@ -49,7 +54,7 @@ public class CheckGroupController {
     }
 
     /**
-     * 根据id查询
+     * 根据检查组id查询
      *
      * @param id
      * @return
@@ -66,7 +71,7 @@ public class CheckGroupController {
     }
 
     /**
-     * 根据检查组合id查询对应的所有检查项id
+     * 根据检查组id查询对应的所有检查项id
      *
      * @param id
      * @return

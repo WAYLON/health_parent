@@ -13,11 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-/**
- * 检查项实现类
- *
- * @author 80481
- */
 @Service(interfaceClass = CheckItemService.class)
 @Transactional
 public class CheckItemServiceImpl implements CheckItemService {
@@ -49,7 +44,7 @@ public class CheckItemServiceImpl implements CheckItemService {
         long count = checkItemDao.findCountByCheckItemId(id);
         if (count > 0) {
             //当前检查项被引用，不能删除
-            throw new RuntimeException("当前检查项被引用，不能删除");
+            throw new RuntimeException("当前检查项被检查组引用，不能删除");
         }
         checkItemDao.deleteById(id);
     }

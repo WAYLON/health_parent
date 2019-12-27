@@ -26,4 +26,6 @@ public interface CheckGroupDao {
 
     public List<CheckGroup> findAll();
 
+    public long findCountByCheckGroupId(Integer id);
+
 }

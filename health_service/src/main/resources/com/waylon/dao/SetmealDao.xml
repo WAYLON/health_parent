@@ -29,7 +29,7 @@
         </if>
     </select>
 
-    <!--根据检查组id删除中间表数据（清理原有关联关系）-->
+    <!--根据套餐id删除中间表数据（清理原有关联关系）-->
     <delete id="deleteAssociation" parameterType="int">
         delete
         from t_setmeal_checkgroup
@@ -56,5 +56,40 @@
         from t_setmeal_checkgroup
         where setmeal_id = #{id}
     </select>
+
+    <!-- 编辑 -->
+    <update id="edit" parameterType="com.waylon.pojo.Setmeal">
+        update t_setmeal
+        <set>
+            <if test="name != null">
+                name = #{name},
+            </if>
+            <if test="sex != null">
+                sex = #{sex},
+            </if>
+            <if test="code != null">
+                code = #{code},
+            </if>
+            <if test="helpCode != null">
+                helpCode = #{helpCode},
+            </if>
+            <if test="attention != null">
+                attention = #{attention},
+            </if>
+            <if test="remark != null">
+                remark = #{remark},
+            </if>
+            <if test="age != null">
+                age = #{age},
+            </if>
+            <if test="price != null">
+                price = #{price},
+            </if>
+            <if test="img != null">
+                img = #{img},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
 
 </mapper>

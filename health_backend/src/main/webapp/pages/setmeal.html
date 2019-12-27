@@ -395,7 +395,7 @@
             //编辑
             handleEdit() {
                 //发送ajax请求，提交模型数据
-                axios.post("/checkGroup/edit.do?checkItemIds=" + this.checkitemIds, this.formData).then((response) => {
+                axios.post("/setmeal/edit.do?checkgroupIds=" + this.checkgroupIds, this.formData).then((response) => {
                     //隐藏编辑窗口
                     this.dialogFormVisible4Edit = false;
                     if (response.data.flag) {
@@ -510,11 +510,14 @@
                 this.dialogFormVisible4Edit = true;
                 this.activeName = 'first';
 
-                //发送ajax请求，根据检查组ID查询当前检查组数据，用于基本信息的回显
+                //发送ajax请求，根据套餐ID查询当前套餐数据，用于基本信息的回显
                 axios.get("/setmeal/findById.do?id=" + row.id).then((res) => {
                     if (res.data.flag) {
                         //查询到数据
                         this.formData = res.data.data;
+                    debugger;
+                        //为模型数据imageUrl赋值，用于页面图片预览
+                        this.imageUrl = "http://q34hl04a7.bkt.clouddn.com/" + this.formData.img;
                     } else {
                         //查询数据失败
                         this.$message.error(res.data.message);
@@ -528,7 +531,7 @@
                         //发送ajax请求，根据套餐组ID查询当前套餐组包含的检查组ID，用于页面复选框回显
                         axios.get("/setmeal/findCheckGroupIdsBySetmealId.do?id=" + row.id).then((res) => {
                             if (res.data.flag) {
-                                this.checkGroupIds = res.data.data;
+                                this.checkgroupIds = res.data.data;
                             } else {
                                 this.$message.error(res.data.message);
                             }

@@ -58,6 +58,15 @@ public class SetmealServiceImpl implements SetmealService {
         return setmealDao.findCheckGroupIdsBySetmealId(id);
     }
 
+    @Override
+    public void edit(Setmeal setmeal, Integer[] checkgroupIds) {
+        //根据套餐id删除中间表数据（清理原有关联关系）
+        setmealDao.deleteAssociation(setmeal.getId());
+        setSetmealAndCheckGroup(setmeal.getId(), checkgroupIds);
+        //更新套餐基本信息
+        setmealDao.edit(setmeal);
+    }
+
     private void setSetmealAndCheckGroup(Integer setmealId, Integer[] checkgroupIds) {
         if (checkgroupIds != null && checkgroupIds.length > 0) {
             for (Integer checkgroupId : checkgroupIds) {
