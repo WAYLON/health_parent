@@ -28,7 +28,7 @@
             <div class="filter-container">
                 <el-input placeholder="项目编码/项目名称" v-model="pagination.queryString" style="width: 200px;"
                           class="filter-item"></el-input>
-                <el-button @click="findPage()" class="dalfBut">查询</el-button>
+                <el-button @click="_findPage()" class="dalfBut">查询</el-button>
                 <el-button type="primary" class="butT" @click="handleCreate()">新建</el-button>
             </div>
             <el-table size="small" current-row-key="id" :data="dataList" stripe highlight-current-row>
@@ -290,6 +290,10 @@
                         return false;
                     }
                 });
+            },
+            _findPage() {
+                this.pagination.currentPage = 1;
+                this.findPage();
             },
             //分页查询
             findPage() {

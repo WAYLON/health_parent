@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.waylon.dao.SetmealDao">
+
     <!--新增-->
     <insert id="add" parameterType="com.waylon.pojo.Setmeal">
         <selectKey resultType="java.lang.Integer" order="AFTER"
@@ -11,12 +12,49 @@
         insert into t_setmeal
         (code,name,sex,age,helpCode,price,remark,attention,img)
         values
-        (#{code},#{name},#{sex},#{age},#{helpCode},#{price},#{remark},#
-        {attention},#{img})
+        (#{code},#{name},#{sex},#{age},#{helpCode},#{price},#{remark},#{attention},#{img})
     </insert>
+
     <!--绑定套餐和检查组多对多关系-->
-    <insert id="setSetmealAndCheckGroup" parameterType="hashmap">
+    <insert id="setSetmealAndCheckGroup" parameterType="HashMap">
         insert into t_setmeal_checkgroup(setmeal_id, checkgroup_id)
         values (#{setmealId}, #{checkGroupId})
     </insert>
+
+    <!--分页条件查询-->
+    <select id="selectByCondition" parameterType="String" resultType="com.waylon.pojo.Setmeal">
+        select * from t_setmeal
+        <if test="value != null and value.length > 0">
+            where code = #{value} or name = #{value}
+        </if>
+    </select>
+
+    <!--根据检查组id删除中间表数据（清理原有关联关系）-->
+    <delete id="deleteAssociation" parameterType="int">
+        delete
+        from t_setmeal_checkgroup
+        where setmeal_id = #{id}
+    </delete>
+
+    <!--删除-->
+    <delete id="deleteById" parameterType="int">
+        delete
+        from t_setmeal
+        where id = #{id}
+    </delete>
+
+    <select id="findById" parameterType="int"
+            resultType="com.waylon.pojo.Setmeal">
+        select *
+        from t_setmeal
+        where id = #{id}
+    </select>
+
+    <select id="findCheckGroupIdsBySetmealId" parameterType="int"
+            resultType="int">
+        select checkgroup_id
+        from t_setmeal_checkgroup
+        where setmeal_id = #{id}
+    </select>
+
 </mapper>

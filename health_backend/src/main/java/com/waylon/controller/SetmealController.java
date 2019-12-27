@@ -2,6 +2,8 @@ package com.waylon.controller;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.waylon.constant.MessageConstant;
+import com.waylon.entity.PageResult;
+import com.waylon.entity.QueryPageBean;
 import com.waylon.entity.Result;
 import com.waylon.pojo.Setmeal;
 import com.waylon.service.SetmealService;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -71,6 +74,69 @@ public class SetmealController {
         }
         //新增套餐成功
         return new Result(true, MessageConstant.ADD_SETMEAL_SUCCESS);
+    }
+
+
+    /**
+     * 套餐分页查询
+     *
+     * @param queryPageBean
+     * @return
+     */
+    @RequestMapping("/findPage")
+    public PageResult findPage(@RequestBody QueryPageBean queryPageBean) {
+        return setmealService.pageQuery(queryPageBean);
+    }
+
+    /**
+     * 删除套餐
+     *
+     * @param id
+     * @return
+     */
+    @RequestMapping("/delete")
+    public Result delete(Integer id) {
+        try {
+            setmealService.deleteById(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new Result(false, MessageConstant.DELETE_SETMEAL_FAIL);
+        }
+        return new Result(true, MessageConstant.DELETE_SETMEAL_SUCCESS);
+    }
+
+    /**
+     * 根据id查询
+     *
+     * @param id
+     * @return
+     */
+    @RequestMapping("/findById")
+    public Result findById(Integer id) {
+        Setmeal setmeal = setmealService.findById(id);
+        if (setmeal != null) {
+            Result result = new Result(true, MessageConstant.QUERY_SETMEAL_SUCCESS);
+            result.setData(setmeal);
+            return result;
+        }
+        return new Result(false, MessageConstant.QUERY_SETMEAL_FAIL);
+    }
+
+    /**
+     * 根据套餐id查询对应的所有检查组id
+     *
+     * @param id
+     * @return
+     */
+    @RequestMapping("/findCheckGroupIdsBySetmealId")
+    public Result findCheckItemIdsByCheckGroupId(Integer id) {
+        try {
+            List<Integer> checkGroupIds = setmealService.findCheckGroupIdsBySetmealId(id);
+            return new Result(true, MessageConstant.QUERY_CHECKGROUP_SUCCESS, checkGroupIds);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new Result(false, MessageConstant.QUERY_CHECKGROUP_FAIL);
+        }
     }
 
 

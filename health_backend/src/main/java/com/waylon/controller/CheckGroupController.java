@@ -58,8 +58,7 @@ public class CheckGroupController {
     public Result findById(Integer id) {
         CheckGroup checkGroup = checkGroupService.findById(id);
         if (checkGroup != null) {
-            Result result = new Result(true,
-                    MessageConstant.QUERY_CHECKGROUP_SUCCESS);
+            Result result = new Result(true, MessageConstant.QUERY_CHECKGROUP_SUCCESS);
             result.setData(checkGroup);
             return result;
         }
