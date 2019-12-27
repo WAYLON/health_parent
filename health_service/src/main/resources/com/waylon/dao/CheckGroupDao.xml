@@ -75,7 +75,14 @@
     </update>
     <!--删除-->
     <delete id="deleteById" parameterType="int">
-        delete from t_checkgroup
+        delete
+        from t_checkgroup
         where id = #{id}
     </delete>
+
+    <!-- 查找全部 -->
+    <select id="findAll" resultType="com.waylon.pojo.CheckGroup">
+        select *
+        from t_checkgroup
+    </select>
 </mapper>

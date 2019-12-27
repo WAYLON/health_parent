@@ -20,4 +20,6 @@ public interface CheckGroupService {
 
     public void deleteById(Integer id);
 
+    public List<CheckGroup> findAll();
+
 }
