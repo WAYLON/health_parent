@@ -63,7 +63,7 @@ public class QiNiuTest {
             //bucketManager.deleteAfterDays(bucket, key, days);
             bucketManager.delete(bucket, key);
         } catch (QiniuException ex) {
-            System.err.println(ex.response.toString());
+            //System.err.println(ex.response.toString());
         }
     }
 }

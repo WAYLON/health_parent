@@ -2,12 +2,15 @@ package com.waylon.controller;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.waylon.constant.MessageConstant;
+import com.waylon.constant.RedisConstant;
 import com.waylon.entity.PageResult;
 import com.waylon.entity.QueryPageBean;
 import com.waylon.entity.Result;
 import com.waylon.pojo.Setmeal;
 import com.waylon.service.SetmealService;
 import com.waylon.utils.QiniuUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,6 +31,8 @@ public class SetmealController {
 
     @Reference
     private SetmealService setmealService;
+    @Autowired
+    private RedisTemplate redisTemplate;
 
     /**
      * 图片上传
@@ -49,6 +54,8 @@ public class SetmealController {
             //图片上传成功
             Result result = new Result(true, MessageConstant.PIC_UPLOAD_SUCCESS);
             result.setData(fileName);
+            //将上传图片名称存入Redis，基于Redis的Set集合存储
+            redisTemplate.opsForSet().add(RedisConstant.SETMEAL_PIC_RESOURCES, fileName);
             return result;
         } catch (Exception e) {
             e.printStackTrace();

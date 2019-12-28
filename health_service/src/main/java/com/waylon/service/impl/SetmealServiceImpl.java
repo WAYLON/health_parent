@@ -3,12 +3,14 @@ package com.waylon.service.impl;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.waylon.constant.RedisConstant;
 import com.waylon.dao.SetmealDao;
 import com.waylon.entity.PageResult;
 import com.waylon.entity.QueryPageBean;
 import com.waylon.pojo.Setmeal;
 import com.waylon.service.SetmealService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 
 import java.util.HashMap;
 import java.util.List;
@@ -19,13 +21,18 @@ public class SetmealServiceImpl implements SetmealService {
 
     @Autowired
     private SetmealDao setmealDao;
+    @Autowired
+    private RedisTemplate redisTemplate;
 
     @Override
     public void add(Setmeal setmeal, Integer[] checkgroupIds) {
         setmealDao.add(setmeal);
         //设置套餐跟检查组的关系表
-        setSetmealAndCheckGroup(setmeal.getId(), checkgroupIds);
-
+        if (checkgroupIds != null && checkgroupIds.length > 0) {
+            setSetmealAndCheckGroup(setmeal.getId(), checkgroupIds);
+        }
+        //将图片名称保存到Redis
+        savePic2Redis(setmeal.getImg());
     }
 
     @Override
@@ -78,4 +85,8 @@ public class SetmealServiceImpl implements SetmealService {
         }
     }
 
+    //将图片名称保存到Redis
+    private void savePic2Redis(String pic) {
+        redisTemplate.opsForSet().add(RedisConstant.SETMEAL_PIC_DB_RESOURCES, pic);
+    }
 }

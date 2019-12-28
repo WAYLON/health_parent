@@ -32,6 +32,7 @@
         <spring.security.version>5.0.5.RELEASE</spring.security.version>
         <poi.version>3.14</poi.version>
         <jedis.version>2.9.0</jedis.version>
+        <redis.version>1.7.2.RELEASE</redis.version>
         <quartz.version>2.2.1</quartz.version>
     </properties>
     <!-- 依赖管理标签  必须加 -->
@@ -193,6 +194,11 @@
                 <groupId>redis.clients</groupId>
                 <artifactId>jedis</artifactId>
                 <version>${jedis.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.data</groupId>
+                <artifactId>spring-data-redis</artifactId>
+                <version>${redis.version}</version>
             </dependency>
             <!-- 安全框架 -->
             <dependency>
