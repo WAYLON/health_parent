@@ -15,4 +15,9 @@ public class OrderSetting implements Serializable {
     private int number;//可预约人数
     private int reservations;//已预约人数
 
+    public OrderSetting(Date date, int number) {
+        this.orderDate = date;
+        this.number = number;
+    }
+
 }
