@@ -1,3 +1,4 @@
+/*
 package com.waylon.POI;
 
 import org.apache.poi.ss.usermodel.Cell;
@@ -14,9 +15,11 @@ import java.io.IOException;
 
 public class POITest {
 
-    /**
+    */
+/**
      * 使用POI读取Excel文件中的数据
-     */
+     *//*
+
     @Test
     public void test1() throws IOException {
         //加载指定文件创建一个工作簿
@@ -83,3 +86,4 @@ public class POITest {
         workbook.close();
     }
 }
+*/

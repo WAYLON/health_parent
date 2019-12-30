@@ -176,6 +176,7 @@
             },
             //上传之前进行文件格式校验
             beforeUpload(file) {
+                debugger;
                 const isXLS = file.type === 'application/vnd.ms-excel';
                 if (isXLS) {
                     return true;

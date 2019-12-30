@@ -20,4 +20,7 @@ public class OrderSetting implements Serializable {
         this.number = number;
     }
 
+    public OrderSetting() {
+    }
+
 }

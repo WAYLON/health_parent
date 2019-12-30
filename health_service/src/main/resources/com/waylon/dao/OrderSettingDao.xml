@@ -20,4 +20,10 @@
         where orderDate = #{orderDate}
     </select>
 
+    <!--根据月份查询预约设置信息-->
+    <select id="getOrderSettingByMonth" parameterType="Map" resultType="com.waylon.pojo.OrderSetting">
+        select *
+        from t_ordersetting
+        where orderDate between #{dateBegin} and #{dateEnd}
+    </select>
 </mapper>
