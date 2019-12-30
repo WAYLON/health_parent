@@ -92,4 +92,9 @@
         where id = #{id}
     </update>
 
+    <select id="findAll" resultType="com.waylon.pojo.Setmeal">
+        select *
+        from t_setmeal
+    </select>
+
 </mapper>

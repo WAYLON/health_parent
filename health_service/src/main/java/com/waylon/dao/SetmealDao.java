@@ -23,4 +23,7 @@ public interface SetmealDao {
     public List<Integer> findCheckGroupIdsBySetmealId(Integer id);
 
     public void edit(Setmeal setmeal);
+
+    public List<Setmeal> findAll();
+
 }

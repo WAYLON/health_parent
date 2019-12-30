@@ -20,4 +20,6 @@ public interface SetmealService {
 
     public void edit(Setmeal setmeal, Integer[] checkgroupIds);
 
+    public List<Setmeal> findAll();
+
 }
