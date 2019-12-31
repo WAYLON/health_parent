@@ -43,6 +43,25 @@
         where id = #{id}
     </delete>
 
+    <resultMap type="com.waylon.pojo.Setmeal" id="baseResultMap">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="code" property="code"/>
+        <result column="helpCode" property="helpCode"/>
+        <result column="sex" property="sex"/>
+        <result column="age" property="age"/>
+        <result column="price" property="price"/>
+        <result column="remark" property="remark"/>
+        <result column="attention" property="attention"/>
+        <result column="img" property="img"/>
+    </resultMap>
+
+    <resultMap type="com.waylon.pojo.Setmeal" id="findByIdResultMap" extends="baseResultMap">
+        <collection property="checkGroups" javaType="ArrayList" ofType="com.waylon.pojo.CheckGroup" column="id"
+                    select="com.waylon.dao.CheckGroupDao.findCheckGroupById">
+        </collection>
+    </resultMap>
+
     <select id="findById" parameterType="int"
             resultType="com.waylon.pojo.Setmeal">
         select *

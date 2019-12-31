@@ -88,7 +88,34 @@
 
     <!--根据检查项组d查询中间关系表-->
     <select id="findCountByCheckGroupId" resultType="long" parameterType="int">
-        select count(*) from t_setmeal_checkgroup
+        select count(*)
+        from t_setmeal_checkgroup
         where checkgroup_id = #{checkgroup_id}
     </select>
+
+    <resultMap type="com.waylon.pojo.CheckGroup" id="baseResultMap">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="code" property="code"/>
+        <result column="helpCode" property="helpCode"/>
+        <result column="sex" property="sex"/>
+        <result column="remark" property="remark"/>
+        <result column="attention" property="attention"/>
+    </resultMap>
+    <resultMap type="com.waylon.pojo.CheckGroup" id="findByIdResultMap" extends="baseResultMap">
+        <collection property="checkItems"
+                    javaType="ArrayList"
+                    ofType="com.waylon.pojo.CheckItem"
+                    column="id"
+                    select="com.itheima.dao.CheckItemDao.findCheckItemById">
+        </collection>
+    </resultMap>
+
+    <!--根据套餐id查询检查项信息-->
+    <select id="findCheckGroupById" resultMap="findByIdResultMap">
+        select *
+        from t_checkgroup
+        where id in (select checkgroup_id from t_setmeal_checkgroup where setmeal_id = #{id})
+    </select>
+
 </mapper>

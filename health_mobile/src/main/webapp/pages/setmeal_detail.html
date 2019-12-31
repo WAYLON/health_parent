@@ -93,10 +93,10 @@
         },
         mounted(){
             //发送ajax请求，根据套餐ID查询套餐详细信息（包括套餐基本信息、套餐包含的检查组、检查组包含的检查项）
-            axios.post("/setmeal/findById.do?id=" + id).then((response) => {
+            axios.post("/mobileSetmeal/findById.do?id=" + id).then((response) => {
                 if(response.data.flag){
                     this.setmeal = response.data.data;
-                    this.imgUrl = 'http://psyrcmf27.bkt.clouddn.com/' + this.setmeal.img;
+                    this.imgUrl = 'http://q34hl04a7.bkt.clouddn.com/' + this.setmeal.img;
                 }
             });
         }
