@@ -2,6 +2,7 @@ package com.waylon.dao;
 
 import com.github.pagehelper.Page;
 import com.waylon.pojo.CheckGroup;
+import com.waylon.pojo.CheckItem;
 
 import java.util.List;
 import java.util.Map;
@@ -27,5 +28,7 @@ public interface CheckGroupDao {
     public List<CheckGroup> findAll();
 
     public long findCountByCheckGroupId(Integer id);
+
+    public List<CheckGroup> findCheckGroupById(Integer id);
 
 }

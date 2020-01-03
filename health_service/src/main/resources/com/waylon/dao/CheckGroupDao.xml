@@ -102,12 +102,13 @@
         <result column="remark" property="remark"/>
         <result column="attention" property="attention"/>
     </resultMap>
+
     <resultMap type="com.waylon.pojo.CheckGroup" id="findByIdResultMap" extends="baseResultMap">
         <collection property="checkItems"
                     javaType="ArrayList"
                     ofType="com.waylon.pojo.CheckItem"
                     column="id"
-                    select="com.itheima.dao.CheckItemDao.findCheckItemById">
+                    select="com.waylon.dao.CheckItemDao.findCheckItemById">
         </collection>
     </resultMap>
 

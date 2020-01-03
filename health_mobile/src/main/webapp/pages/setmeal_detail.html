@@ -4,12 +4,13 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0,user-scalable=no,minimal-ui">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0,user-scalable=no,minimal-ui">
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="../img/asset-favico.ico">
     <title>预约详情</title>
-    <link rel="stylesheet" href="../css/page-health-orderDetail.css" />
+    <link rel="stylesheet" href="../css/page-health-orderDetail.css"/>
     <script src="../plugins/vue/vue.js"></script>
     <script src="../plugins/vue/axios-0.18.0.js"></script>
     <script src="../plugins/healthmobile.js"></script>
@@ -30,7 +31,7 @@
     <div class="contentBox">
         <div class="card">
             <div class="project-img">
-                <img :src="imgUrl" width="100%" height="100%" />
+                <img :src="imgUrl" width="100%" height="100%"/>
             </div>
             <div class="project-text">
                 <h4 class="tit">{{setmeal.name}}</h4>
@@ -81,20 +82,20 @@
 </div>
 <script>
     var vue = new Vue({
-        el:'#app',
-        data:{
-            imgUrl:null,//套餐对应的图片链接
-            setmeal:{}//模型数据（套餐信息），用于页面数据展示
+        el: '#app',
+        data: {
+            imgUrl: null,//套餐对应的图片链接
+            setmeal: {}//模型数据（套餐信息），用于页面数据展示
         },
-        methods:{
-            toOrderInfo(){
+        methods: {
+            toOrderInfo() {
                 window.location.href = "orderInfo.html?id=" + id;
             }
         },
-        mounted(){
+        mounted() {
             //发送ajax请求，根据套餐ID查询套餐详细信息（包括套餐基本信息、套餐包含的检查组、检查组包含的检查项）
             axios.post("/mobileSetmeal/findById.do?id=" + id).then((response) => {
-                if(response.data.flag){
+                if (response.data.flag) {
                     this.setmeal = response.data.data;
                     this.imgUrl = 'http://q34hl04a7.bkt.clouddn.com/' + this.setmeal.img;
                 }
