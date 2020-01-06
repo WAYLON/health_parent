@@ -9,12 +9,14 @@ import com.waylon.entity.QueryPageBean;
 import com.waylon.pojo.CheckGroup;
 import com.waylon.service.CheckGroupService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Service
+@Transactional
+@Service(interfaceClass = CheckGroupService.class)
 public class CheckGroupServiceImpl implements CheckGroupService {
 
     @Autowired

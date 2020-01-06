@@ -16,4 +16,8 @@ public interface OrderSettingDao {
 
     public List<OrderSetting> getOrderSettingByMonth(Map<String, Date> date);
 
+    public OrderSetting findByOrderDate(Date orderDate);
+
+    public void editReservationsByOrderDate(OrderSetting orderSetting);
+
 }

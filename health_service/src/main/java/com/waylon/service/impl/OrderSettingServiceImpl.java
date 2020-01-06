@@ -19,8 +19,8 @@ import java.util.Map;
 /**
  * 预约设置服务
  */
-@Service(interfaceClass = OrderSettingService.class)
 @Transactional
+@Service(interfaceClass = OrderSettingService.class)
 public class OrderSettingServiceImpl implements OrderSettingService {
 
     @Autowired

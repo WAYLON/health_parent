@@ -8,12 +8,14 @@ import com.waylon.dao.SetmealDao;
 import com.waylon.entity.PageResult;
 import com.waylon.entity.QueryPageBean;
 import com.waylon.pojo.Setmeal;
+import com.waylon.service.OrderSettingService;
 import com.waylon.service.SetmealService;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 
 import java.io.BufferedWriter;
@@ -25,15 +27,19 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Service
+@Transactional
+@Service(interfaceClass = SetmealService.class)
 public class SetmealServiceImpl implements SetmealService {
 
     @Autowired
     private SetmealDao setmealDao;
+
     @Autowired
     private RedisTemplate redisTemplate;
+
     @Autowired
     private FreeMarkerConfigurer freeMarkerConfigurer;
+
     @Value("${out_put_path}")
     private String outputpath;
 

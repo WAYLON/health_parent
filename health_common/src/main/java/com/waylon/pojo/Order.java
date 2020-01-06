@@ -1,6 +1,8 @@
 package com.waylon.pojo;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -9,6 +11,8 @@ import java.util.Date;
  * 体检预约信息
  */
 @Data
+@AllArgsConstructor//全参构造器
+@NoArgsConstructor//无参构造器
 public class Order implements Serializable {
     public static final String ORDERTYPE_TELEPHONE = "电话预约";
     public static final String ORDERTYPE_WEIXIN = "微信预约";
