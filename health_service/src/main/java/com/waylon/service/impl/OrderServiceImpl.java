@@ -49,7 +49,7 @@ public class OrderServiceImpl implements OrderService {
         //存入缓存
         redisTemplate.boundHashOps("code").put(mobile, code);
         //设置过期时间 TODO
-        redisTemplate.opsForValue().set("code", mobile, 5L, TimeUnit.MINUTES);
+        redisTemplate.boundHashOps("code").expire(5L, TimeUnit.MINUTES);
         //发送到activeMQ	....
         jmsTemplate.send(smsDestination, session -> {
             MapMessage mapMessage = session.createMapMessage();
@@ -119,6 +119,24 @@ public class OrderServiceImpl implements OrderService {
         orderDao.add(order);
 
         return new Result(true, MessageConstant.ORDER_SUCCESS, order.getId());
+    }
+
+    /**
+     * 根据id查询预约信息，包括体检人信息、套餐信息
+     *
+     * @param id
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public Map findById(Integer id) throws Exception {
+        Map map = orderDao.findById4Detail(id);
+        if (map != null) {
+            //处理日期格式
+            Date orderDate = (Date) map.get("orderDate");
+            map.put("orderDate", DateUtils.parseDate2String(orderDate));
+        }
+        return map;
     }
 
 

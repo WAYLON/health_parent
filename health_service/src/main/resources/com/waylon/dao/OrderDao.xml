@@ -51,4 +51,14 @@
         </where>
     </select>
 
+    <!--根据预约id查询预约信息，包括体检人信息、套餐信息-->
+    <select id="findById4Detail" parameterType="int" resultType="map">
+        select m.name member, s.name setmeal, o.orderDate orderDate, o.orderType orderType
+        from t_order o,
+             t_member m,
+             t_setmeal s
+        where o.member_id = m.id
+          and o.setmeal_id = s.id
+          and o.id = #{id}
+    </select>
 </mapper>

@@ -77,15 +77,30 @@ public class OrderController {
             //预约失败
             return result;
         }
-         /*if(result.isFlag()){
-           //预约成功，发送短信通知 todo
-            String orderDate = (String) map.get("orderDate");
-            try {
-                SMSUtils.sendShortMessage(SMSUtils.ORDER_NOTICE,telephone,orderDate);
-            } catch (ClientException e) {
-                e.printStackTrace();
-            }
-        }*/
+        if (result.isFlag()) {
+            //预约成功，发送短信通知 TODO
+
+
+        }
         return result;
+    }
+
+    /**
+     * 根据id查询预约信息，包括套餐信息和会员信息
+     *
+     * @param id
+     * @return
+     */
+    @RequestMapping("/findById")
+    public Result findById(Integer id) {
+        try {
+            Map map = orderService.findById(id);
+            //查询预约信息成功
+            return new Result(true, MessageConstant.QUERY_ORDER_SUCCESS, map);
+        } catch (Exception e) {
+            e.printStackTrace();
+            //查询预约信息失败
+            return new Result(false, MessageConstant.QUERY_ORDER_FAIL);
+        }
     }
 }
