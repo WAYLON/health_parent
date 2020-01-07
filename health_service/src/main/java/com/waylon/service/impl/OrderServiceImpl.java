@@ -55,6 +55,8 @@ public class OrderServiceImpl implements OrderService {
             MapMessage mapMessage = session.createMapMessage();
             mapMessage.setObject("mobile", mobile);//手机号
             mapMessage.setObject("params", code);//参数
+            mapMessage.setObject("templateCode", "SMS_176926166");//模板code
+            mapMessage.setObject("signName", "WAYLON");//签名
             return mapMessage;
         });
     }
@@ -139,5 +141,17 @@ public class OrderServiceImpl implements OrderService {
         return map;
     }
 
+    @Override
+    public void successfulBook(String telephone, String orderDate) {
+        //发送到activeMQ	....
+        jmsTemplate.send(smsDestination, session -> {
+            MapMessage mapMessage = session.createMapMessage();
+            mapMessage.setObject("mobile", telephone);//手机号
+            mapMessage.setObject("params", orderDate);//参数
+            mapMessage.setObject("templateCode", "SMS_181868714");//模板code
+            mapMessage.setObject("signName", "WLhealth");//签名
+            return mapMessage;
+        });
+    }
 
 }

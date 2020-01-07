@@ -78,9 +78,9 @@ public class OrderController {
             return result;
         }
         if (result.isFlag()) {
-            //预约成功，发送短信通知 TODO
-
-
+            //预约成功，发送短信通知 todo
+            String orderDate = (String) map.get("orderDate");
+            orderService.successfulBook(telephone, orderDate);
         }
         return result;
     }

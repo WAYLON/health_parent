@@ -11,4 +11,7 @@ public interface OrderService {
     public Result order(Map map) throws Exception;
 
     public Map findById(Integer id) throws Exception;
+
+    public void successfulBook(String telephone, String orderDate);
+
 }
