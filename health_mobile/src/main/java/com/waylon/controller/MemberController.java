@@ -7,6 +7,7 @@ import com.waylon.constant.RedisMessageConstant;
 import com.waylon.entity.Result;
 import com.waylon.pojo.Member;
 import com.waylon.service.MemberService;
+import com.waylon.utils.PhoneFormatCheckUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -30,14 +31,34 @@ public class MemberController {
     @Autowired
     private RedisTemplate redisTemplate;
 
-    //使用手机号和验证码登录
+    @RequestMapping("/send4Login")
+    public Result send4Login(String telephone) {
+        //判断手机号格式
+        if (!PhoneFormatCheckUtils.isPhoneLegal(telephone)) {
+            return new Result(false, "手机号格式不正确");
+        }
+        try {
+            memberService.sendLoginSmsCode(telephone);
+            return new Result(true, "验证码发送成功");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new Result(true, "验证码发送失败");
+        }
+    }
+
+    /**
+     * 使用手机号和验证码登录
+     *
+     * @param response
+     * @param map
+     * @return
+     */
     @RequestMapping("/login")
     public Result login(HttpServletResponse response, @RequestBody Map map) {
         String telephone = (String) map.get("telephone");
         String validateCode = (String) map.get("validateCode");
         //从Redis中获取缓存的验证码
-        String codeInRedis = (String) redisTemplate.opsForValue().get(telephone + RedisMessageConstant.SENDTYPE_LOGIN);
-
+        String codeInRedis = (String)  redisTemplate.boundValueOps(telephone + RedisMessageConstant.SENDTYPE_LOGIN).get();
         if (codeInRedis == null || !codeInRedis.equals(validateCode)) {
             //验证码输入错误
             return new Result(false, MessageConstant.VALIDATECODE_ERROR);
@@ -61,7 +82,7 @@ public class MemberController {
             //保存会员信息到Redis中
             String json = JSON.toJSON(member).toString();
 
-            redisTemplate.opsForValue().set(telephone, json, 1800, TimeUnit.MINUTES);
+            redisTemplate.opsForValue().set(telephone, json, 1800, TimeUnit.SECONDS);
 
             return new Result(true, MessageConstant.LOGIN_SUCCESS);
         }

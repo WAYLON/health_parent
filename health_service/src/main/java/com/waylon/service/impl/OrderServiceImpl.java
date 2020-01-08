@@ -51,14 +51,7 @@ public class OrderServiceImpl implements OrderService {
         //设置过期时间 TODO
         redisTemplate.boundHashOps("code").expire(5L, TimeUnit.MINUTES);
         //发送到activeMQ	....
-        jmsTemplate.send(smsDestination, session -> {
-            MapMessage mapMessage = session.createMapMessage();
-            mapMessage.setObject("mobile", mobile);//手机号
-            mapMessage.setObject("params", code);//参数
-            mapMessage.setObject("templateCode", "SMS_176926166");//模板code
-            mapMessage.setObject("signName", "WAYLON");//签名
-            return mapMessage;
-        });
+        MemberServiceImpl.jmsSend(mobile, code, jmsTemplate, smsDestination);
     }
 
     @Override

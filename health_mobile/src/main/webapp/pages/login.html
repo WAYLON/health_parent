@@ -77,7 +77,7 @@
                 validateCodeButton = $("#validateCodeButton")[0];//锁定dom对象
                 clock = window.setInterval(doLoop, 1000);//定时器方法，可以实现每隔指定的时间调用指定的方法
                 //发送ajax请求，为用户发送手机验证码
-                axios.post("/validateCode/send4Login.do?telephone=" + telephone).then((res) => {
+                axios.post("/member/send4Login.do?telephone=" + telephone).then((res) => {
                     if (!res.data.flag) {
                         //短信验证码发送失败
                         this.$message.error(res.data.message);
