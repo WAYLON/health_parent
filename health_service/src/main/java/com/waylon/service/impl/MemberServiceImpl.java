@@ -14,7 +14,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.jms.Destination;
 import javax.jms.MapMessage;
-import java.util.concurrent.TimeUnit;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 会员服务
@@ -68,5 +69,17 @@ public class MemberServiceImpl implements MemberService {
             member.setPassword(password);
         }
         memberDao.add(member);
+    }
+
+    //根据月份统计会员数量
+    @Override
+    public List<Integer> findMemberCountByMonth(List<String> month) {
+        List<Integer> list = new ArrayList<>();
+        for (String m : month) {
+            m = m + ".31";//格式：2019.04.31
+            Integer count = memberDao.findMemberCountBeforeDate(m);
+            list.add(count);
+        }
+        return list;
     }
 }
