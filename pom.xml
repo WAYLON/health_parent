@@ -35,7 +35,7 @@
         <poi.version>3.14</poi.version>
         <jedis.version>2.9.0</jedis.version>
         <redis.version>1.7.2.RELEASE</redis.version>
-        <quartz.version>2.2.1</quartz.version>
+        <quartz.version>2.3.2</quartz.version>
     </properties>
     <!-- 依赖管理标签  必须加 -->
     <dependencyManagement>
